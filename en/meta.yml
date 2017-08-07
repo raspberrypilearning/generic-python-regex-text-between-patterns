@@ -1,17 +1,15 @@
-title: generic-python-regex-text-between-patterns
+title: Finding text between patterns with regex and Python
 hero_image: images/banner.png
-description: generic-python-regex-text-between-patterns description
+description: Finding text between patterns with regex
 original_url: https://codeclubprojects.org/en-GB/scratch/rock-band
 theme: red # possible values: blue, green, navy, orange, red, turquoise, violet, yellow
 duration: 1 # possible values: 1, 2 or 3
 listed: false
-ingredient: false
+ingredient: true
 copyedit: false
-curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
-interests: "games, jokes/pranks, music/sound, photography, physical computing, robots, space"
-technologies: "electronics, sense-hat, physical computing, html/css, scratch, python"
+curriculum: 
+interests: 
+technologies: "python"
 site_areas:
 steps:
-  - title: Introduction
-  - title: What you will need
-  - title: Step title
+  - title: Finding text

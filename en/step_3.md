@@ -1,3 +1,0 @@
-## Step title
-
-+ Step content...

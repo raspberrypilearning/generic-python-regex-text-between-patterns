@@ -1,19 +1,111 @@
-## Introduction
+- You can find text between other characters or sequences of characters using Python's `re` module and the `findall()` method.
 
-Add project description here. What will learners be making?
+- Let's suppose you have the following string:
 
-### What you will make
+```python
+text = 'start Here is a line end'
+```
 
-Add something here to showcase here, for example:
+- Imagine you want to find all the text between `start` and `end`. Here's the regex search you might use
 
-<div class="scratch-preview">
-  <iframe allowtransparency="true" width="485" height="402" src="https://scratch.mit.edu/projects/embed/160619869/?autostart=false" frameborder="0"></iframe>
-</div>
+```python
+import re
+text = 'start Here is a line end'
+matches = re.findall(r'start.*end', text)
+```
 
-Add instructions here. These should explain either how the finished project will work, or explain how to interact with the content above.
+- If you now check `matches` in the interpreter, you will see that it is a list of matches.
 
-### What you will learn
+```python
+>>> matches
+['start Here is a line end']
+```
 
-This project covers elements from the following strands of the [Raspberry Pi Digital Making Curriculum](http://rpf.io/curriculum):
+- What happens if there is more than one match?
 
-+ [Add curriculum strand/level description.](https://www.raspberrypi.org/curriculum/strand/level)
+```python
+import re
+text = 'start Here is a line end start and here is some more end'
+matches = re.findall(r'start.*end', text)
+```
+
+```python
+>>> match
+['start Here is a line end start and here is some more end']
+```
+
+- That wasn't what we wanted. This is because this regex is described as **greedy**. It searches the entire string before returning the match, and uses all characters between the first `start` and the last `end`.
+
+- To make the **regex** non-greedy, you need to use a `.*?` rather than `.*`.
+
+```python
+import re
+text = 'start Here is a line end start and here is some more end'
+matches = re.findall(r'start.*?end', text)
+```
+
+```python
+>>> match
+['start Here is a line end', 'start and here is some more end']
+```
+
+- Now the list has two elements in it.
+
+- If you didn't want to include the `start` and `end` words in the results then you need to tell the **regex** to **look ahead** and **look behind**.
+
+- `?<=` means **look ahead**. It searches for text **after** the match.
+
+- `?=` means **look behind**. It searches for text **before** the match.
+
+- Both need surrounding in brackets along with the pattern being searched for.
+
+```python
+match = re.findall(r'(?<=start).*?(?=end)', text)
+```
+
+```python
+>>> match
+[' Here is a line ', ' and here is some more ']
+```
+
+- What happens with multi-line strings?
+
+```python
+import re
+text = '''
+start
+Here is a line
+end
+start
+and here is some more
+end'''
+
+match = re.findall(r'(?<=start).*?(?=end)', text)
+```
+
+```python
+>>> match
+[]
+```
+
+- That's no what we wanted. The problem is that newlines (`\n`) stop the regex search. A `flag` added to the search can sort this out though.
+
+```python
+import re
+
+text = '''
+start
+Here is a line
+end
+start
+and here is some more
+end'''
+
+match = re.findall(r'(?<=start).*?(?=end)', text, flags=re.DOTALL)
+```
+
+```python
+>>> match
+['\nHere is a line\n', '\nand here is some more\n']
+```
+
