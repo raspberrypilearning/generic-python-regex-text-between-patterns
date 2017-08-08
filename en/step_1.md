@@ -1,4 +1,4 @@
-- You can find text between other characters or sequences of characters using Python's `re` module and the `findall()` method.
+If you want to find text located between specific characters or sequences of characters, you can use Python's `re` module and the `findall()` method.
 
 - Let's suppose you have the following string:
 
@@ -6,7 +6,7 @@
 	text = 'start Here is a line end'
 	```
 
-- Imagine you want to find all the text between `start` and `end`. Here's the regex search you might use
+- Imagine you want to find all the text between `'start'` and `'end'`. Here's the regex search you might use to do so:
 
 	```python
 	import re
@@ -14,14 +14,14 @@
 	matches = re.findall(r'start.*end', text)
 	```
 
-- If you now check `matches` in the interpreter, you will see that it is a list of matches.
+- If you now check the `matches` variable in the interpreter, you will see that it is a list of the matches Python has found:
 
 	```python
 	>>> matches
 	['start Here is a line end']
 	```
 
-- What happens if there is more than one match?
+- What happens if there is more than one match, like in the example below?
 
 	```python
 	import re
@@ -34,7 +34,7 @@
 	['start Here is a line end start and here is some more end']
 	```
 
-- That wasn't what we wanted. This is because this regex is described as **greedy**. It searches the entire string before returning the match, and uses all characters between the first `start` and the last `end`.
+- That wasn't what we wanted. This is because this regex is described as **greedy**. That means it searches the entire string before returning the match, and then returns all characters between the first `'start'` and the last `'end'`.
 
 - To make the **regex** non-greedy, you need to use a `.*?` rather than `.*`.
 
@@ -51,13 +51,13 @@
 
 - Now the list has two elements in it.
 
-- If you didn't want to include the `start` and `end` words in the results then you need to tell the **regex** to **look ahead** and **look behind**.
+- If you don't want Python to include the `start` and `end` words in the results, then you need to tell the **regex** to **look ahead** and **look behind**. There are two regex elements which will do that:
 
-- `?<=` means **look ahead**. It searches for text **after** the match.
+- `?<=` means **look ahead**. Use it to search for text **after** the match.
 
-- `?=` means **look behind**. It searches for text **before** the match.
+- `?=` means **look behind**. Use it to search for text **before** the match.
 
-- Both need surrounding in brackets along with the pattern being searched for.
+- For these elements to work, you need to surround them and the pattern you're looking for in brackets:
 
 	```python
 	match = re.findall(r'(?<=start).*?(?=end)', text)
@@ -68,7 +68,7 @@
 	[' Here is a line ', ' and here is some more ']
 	```
 
-- What happens with multi-line strings?
+- What happens with strings spread across multiple lines, such as the one below?
 
 	```python
 	import re
@@ -88,7 +88,7 @@
 	[]
 	```
 
-- That's not what we wanted. The problem is that newlines (`\n`) stop the regex search. A `flag` added to the search can sort this out though.
+- That's not what we wanted. The problem is that newlines (`\n`) stop the regex search. Adding a `flag` to the search can sort this out though:
 
 	```python
 	import re
