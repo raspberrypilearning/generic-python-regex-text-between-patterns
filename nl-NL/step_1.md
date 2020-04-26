@@ -10,28 +10,28 @@ Als je tekst tussen specifieke tekens of reeksen tekens wilt vinden, kun je de `
 
     ```python
     import re
-text = 'start Hier is een regel einde'
-overeenkomsten = re.findall(r'start.*einde', tekst)
+    text = 'start Hier is een regel einde'
+    overeenkomsten = re.findall(r'start.*einde', tekst)
     ```
 
 - Als je nu de variabele `overeenkomsten` in de interpreter controleert, zul je zien dat het een lijst is met de overeenkomsten die Python heeft gevonden:
 
     ```python
     >>> overeenkomsten
-['start Hier is een regel einde']
+    ['start Hier is een regel einde']
     ```
 
 - Wat gebeurt er als er meer dan één overeenkomst is, zoals in het onderstaande voorbeeld?
 
     ```python
     import re
-tekst = 'start Hier is een regel einde start en hier is wat meer einde'
-overeenkomsten = re.findall(r'start.*einde', tekst)
+    tekst = 'start Hier is een regel einde start en hier is wat meer einde'
+    overeenkomsten = re.findall(r'start.*einde', tekst)
     ```
 
     ```python
     >>> overeenkomsten
-['start Hier is een regel einde start en hier is wat meer einde']
+    ['start Hier is een regel einde start en hier is wat meer einde']
     ```
 
 - Dat was niet wat we wilden. Dit komt omdat deze regex wordt beschreven als **hebzuchtig**. Dat betekent dat het de hele reeks doorzoekt voordat de overeenkomsten worden geretourneerd en vervolgens alle tekens tussen de eerste `'start'` en de laatste `'einde'` retourneert.
@@ -40,13 +40,13 @@ overeenkomsten = re.findall(r'start.*einde', tekst)
 
     ```python
     import re
-tekst = 'start Hier is een regel einde start en hier is wat meer einde'
-overeenkomsten = re.findall(r'start.*?einde', tekst)
+    tekst = 'start Hier is een regel einde start en hier is wat meer einde'
+    overeenkomsten = re.findall(r'start.*?einde', tekst)
     ```
 
     ```python
     >>> overeenkomsten
-['start Hier is een regel einde', 'start en hier is wat meer einde']
+    ['start Hier is een regel einde', 'start en hier is wat meer einde']
     ```
 
 - Nu bevat de lijst twee elementen.
@@ -65,27 +65,27 @@ overeenkomsten = re.findall(r'start.*?einde', tekst)
 
     ```python
     >>> overeenkomsten
-['Hier is een regel', 'en hier is wat meer']
+    ['Hier is een regel', 'en hier is wat meer']
     ```
 
 - Wat gebeurt er met tekenreeksen verspreid over meerdere lijnen, zoals die hieronder?
 
     ```python
     import re
-text = '''
-start
-Hier is een regel
-einde
-start
-en hier is nog wat
-einde'''
+    text = '''
+    start
+    Hier is een regel
+    einde
+    start
+    en hier is nog wat
+    einde'''
 
 overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
     ```
 
     ```python
     >>> overeenkomsten
-[]
+    []
     ```
 
 - Dat is niet wat we wilden. Het probleem is dat nieuwe regels (`\n`) het zoeken naar regex stoppen. Het toevoegen van een `vlag` aan de zoekopdracht kan dit echter oplossen:
@@ -93,19 +93,19 @@ overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
     ```python
     import re
 
-text = '''
-start
-Hier is een regel
-einde
-start
-en hier is nog wat
-einde'''
+    text = '''
+    start
+    Hier is een regel
+    einde
+    start
+    en hier is nog wat
+    einde'''
 
 overeenkomsten = re.findall(r'(?<=start).*?(?=einde)', tekst, flags=re.DOTALL)
     ```
 
     ```python
     >>> overeenkomsten
-['\nHier is een regel\n', '\nen hier is nog wat\n']
+[   '\nHier is een regel\n', '\nen hier is nog wat\n']
     ```
 
