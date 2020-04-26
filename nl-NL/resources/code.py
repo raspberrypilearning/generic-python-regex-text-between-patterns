@@ -1,14 +1,14 @@
 import re
 
-text = '''
+tekst = '''
 start
-Here is a line
-end
+Hier is een regel
+einde
 start
-and here is some more
-end'''
+en hier is nog wat meer
+einde'''
 
-match = re.findall(r'(?<=start).*?(?=end)', text, flags=re.DOTALL)
+match = re.findall(r'(?<=start).*?(?=einde)', tekst, flags=re.DOTALL)
 
 
 
