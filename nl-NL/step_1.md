@@ -80,7 +80,7 @@ Als je tekst tussen specifieke tekens of reeksen tekens wilt vinden, kun je de `
     en hier is nog wat
     einde'''
 
-overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
+    overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
     ```
 
     ```python
@@ -101,11 +101,11 @@ overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
     en hier is nog wat
     einde'''
 
-overeenkomsten = re.findall(r'(?<=start).*?(?=einde)', tekst, flags=re.DOTALL)
+    overeenkomsten = re.findall(r'(?<=start).*?(?=einde)', tekst, flags=re.DOTALL)
     ```
 
     ```python
     >>> overeenkomsten
-[   '\nHier is een regel\n', '\nen hier is nog wat\n']
+    ['\nHier is een regel\n', '\nen hier is nog wat\n']
     ```
 
