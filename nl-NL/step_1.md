@@ -1,111 +1,111 @@
-If you want to find text located between specific characters or sequences of characters, you can use Python's `re` module and the `findall()` method.
+Als je tekst tussen specifieke tekens of reeksen tekens wilt vinden, kun je de `re` module van Python en de methode `findall()` gebruiken.
 
-- Let's suppose you have the following string:
+- Stel dat je de volgende tekenreeks hebt:
 
     ```python
-    text = 'start Here is a line end'
+    tekst = 'start Hier is een regel einde'
     ```
 
-- Imagine you want to find all the text between `'start'` and `'end'`. Here's the regex search you might use to do so:
+- Stel je voor dat je alle tekst tussen `'start'` en `'einde'` wilt vinden. Hier is de regex-zoekopdracht die je hiervoor zou kunnen gebruiken:
 
     ```python
     import re
-    text = 'start Here is a line end'
-    matches = re.findall(r'start.*end', text)
+text = 'start Hier is een regel einde'
+overeenkomsten = re.findall(r'start.*einde', tekst)
     ```
 
-- If you now check the `matches` variable in the interpreter, you will see that it is a list of the matches Python has found:
+- Als je nu de variabele `overeenkomsten` in de interpreter controleert, zul je zien dat het een lijst is met de overeenkomsten die Python heeft gevonden:
 
     ```python
-    >>> matches
-    ['start Here is a line end']
+    >>> overeenkomsten
+['start Hier is een regel einde']
     ```
 
-- What happens if there is more than one match, like in the example below?
-
-    ```python
-    import re
-    text = 'start Here is a line end start and here is some more end'
-    matches = re.findall(r'start.*end', text)
-    ```
-
-    ```python
-    >>> match
-    ['start Here is a line end start and here is some more end']
-    ```
-
-- That wasn't what we wanted. This is because this regex is described as **greedy**. That means it searches the entire string before returning the match, and then returns all characters between the first `'start'` and the last `'end'`.
-
-- To make the **regex** non-greedy, you need to use a `.*?` rather than `.*`.
+- Wat gebeurt er als er meer dan één overeenkomst is, zoals in het onderstaande voorbeeld?
 
     ```python
     import re
-    text = 'start Here is a line end start and here is some more end'
-    matches = re.findall(r'start.*?end', text)
+tekst = 'start Hier is een regel einde start en hier is wat meer einde'
+overeenkomsten = re.findall(r'start.*einde', tekst)
     ```
 
     ```python
-    >>> match
-    ['start Here is a line end', 'start and here is some more end']
+    >>> overeenkomsten
+['start Hier is een regel einde start en hier is wat meer einde']
     ```
 
-- Now the list has two elements in it.
+- Dat was niet wat we wilden. Dit komt omdat deze regex wordt beschreven als **hebzuchtig**. Dat betekent dat het de hele reeks doorzoekt voordat de overeenkomsten worden geretourneerd en vervolgens alle tekens tussen de eerste `'start'` en de laatste `'einde'` retourneert.
 
-- If you don't want Python to include the `start` and `end` words in the results, then you need to tell the **regex** to **look ahead** and **look behind**. There are two regex elements which will do that:
-
-- `?<=` means **look ahead**. Use it to search for text **after** the match.
-
-- `?=` means **look behind**. Use it to search for text **before** the match.
-
-- For these elements to work, you need to surround them and the pattern you're looking for in brackets:
-
-    ```python
-    match = re.findall(r'(?<=start).*?(?=end)', text)
-    ```
-
-    ```python
-    >>> match
-    [' Here is a line ', ' and here is some more ']
-    ```
-
-- What happens with strings spread across multiple lines, such as the one below?
+- Om de **regex** niet hebzuchtig te maken, moet je een `.*?` gebruiken in plaats van `*`.
 
     ```python
     import re
-    text = '''
-    start
-    Here is a line
-    end
-    start
-    and here is some more
-    end'''
-
-    match = re.findall(r'(?<=start).*?(?=end)', text)
+tekst = 'start Hier is een regel einde start en hier is wat meer einde'
+overeenkomsten = re.findall(r'start.*?einde', tekst)
     ```
 
     ```python
-    >>> match
-    []
+    >>> overeenkomsten
+['start Hier is een regel einde', 'start en hier is wat meer einde']
     ```
 
-- That's not what we wanted. The problem is that newlines (`\n`) stop the regex search. Adding a `flag` to the search can sort this out though:
+- Nu bevat de lijst twee elementen.
+
+- Als je niet wilt dat Python de woorden `start` en `einde` in de resultaten opneemt, moet je de **regex** opdragen **vooruit te kijken** en **achteruit te kijken**. Er zijn twee regex-elementen die dat zullen doen:
+
+- `?<=` betekent **vooruit kijken**. Gebruik dit om naar tekst **te zoeken na** de overeenkomst.
+
+- `? =` betekent **achteruit kijken**. Gebruik het om naar tekst **te zoeken vóór** de overeenkomst.
+
+- Om deze elementen te laten werken, moet je ze en het patroon waarnaar je op zoek bent omringen door haakjes:
+
+    ```python
+    overeenkomsten = re.findall(r'(?<=start).*?(?=einde)', tekst)
+    ```
+
+    ```python
+    >>> overeenkomsten
+['Hier is een regel', 'en hier is wat meer']
+    ```
+
+- Wat gebeurt er met tekenreeksen verspreid over meerdere lijnen, zoals die hieronder?
+
+    ```python
+    import re
+text = '''
+start
+Hier is een regel
+einde
+start
+en hier is nog wat
+einde'''
+
+overeenkomsten = re.findall(r'(?<= start).*?(?= einde)', tekst)
+    ```
+
+    ```python
+    >>> overeenkomsten
+[]
+    ```
+
+- Dat is niet wat we wilden. Het probleem is dat nieuwe regels (`\n`) het zoeken naar regex stoppen. Het toevoegen van een `vlag` aan de zoekopdracht kan dit echter oplossen:
 
     ```python
     import re
 
-    text = '''
-    start
-    Here is a line
-    end
-    start
-    and here is some more
-    end'''
+text = '''
+start
+Hier is een regel
+einde
+start
+en hier is nog wat
+einde'''
 
-    match = re.findall(r'(?<=start).*?(?=end)', text, flags=re.DOTALL)
+overeenkomsten = re.findall(r'(?<=start).*?(?=einde)', tekst, flags=re.DOTALL)
     ```
 
     ```python
-    >>> match
-    ['\nHere is a line\n', '\nand here is some more\n']
+    >>> overeenkomsten
+['\nHier is een regel\n', '\nen hier is nog wat\n']
     ```
 
