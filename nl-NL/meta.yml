@@ -1,0 +1,16 @@
+---
+title: Tekst zoeken tussen patronen met regex en Python
+hero_image: images/banner.png
+description: Tekst zoeken tussen patronen met regex
+original_url: https://codeclubprojects.org/en-GB/scratch/rock-band
+theme: red #possible values: blue, green, navy, orange, red, turquoise, violet, yellow
+duration: 1 #possible values: 1, 2 or 3
+listed: false
+ingredient: true
+copyedit: true
+curriculum:
+interests:
+technologies: "python"
+site_areas:
+steps:
+  - title: Tekst zoeken
