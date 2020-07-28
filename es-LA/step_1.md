@@ -17,7 +17,7 @@ Si deseas encontrar texto ubicado entre caracteres específicos o secuencias de 
 - Si ahora revisas la variable `coincidencias` en el intérprete, verás que es una lista de las coincidencias que Python ha encontrado:
 
     ```python
-    >>> matches
+    >>> coincidencias
     ['start Aqui hay un fin de linea']
     ```
 
@@ -65,7 +65,7 @@ Si deseas encontrar texto ubicado entre caracteres específicos o secuencias de 
 
     ```python
     >>> coincidencia
-    ['Aqui hay una linea', 'y aqui hay otra']
+    [' Aqui hay una linea ', ' y aqui hay otra ']
     ```
 
 - ¿Qué sucede con las cadenas distribuidas en múltiples líneas, como la de abajo?
