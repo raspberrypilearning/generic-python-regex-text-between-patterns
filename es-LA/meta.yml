@@ -1,7 +1,7 @@
 ---
-title: Buscando texto entre patrones con regex y Python
+title: Buscar texto entre patrones con regex y Python
 hero_image: images/banner.png
-description: Buscando texto entre patrones con regex
+description: Buscar texto entre patrones con regex
 original_url: https://codeclubprojects.org/en-GB/scratch/rock-band
 theme: red #possible values: blue, green, navy, orange, red, turquoise, violet, yellow
 duration: 1 #possible values: 1, 2 or 3
